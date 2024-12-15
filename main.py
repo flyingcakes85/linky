@@ -1,5 +1,7 @@
 import argparse
 import os
+import json
+from pathlib import Path
 
 
 if __name__ == "__main__":
@@ -18,6 +20,16 @@ if __name__ == "__main__":
     except:
         print("Couldn't create build directory at " + args.output_dir)
 
+    with open(args.links) as f:
+        d = json.load(f)
+    
+    for i in d:
+        print(i + d[i])
+        output_file = Path(args.output_dir + "/" + i + "/index.html")
+        output_file.parent.mkdir(exist_ok=True, parents=True)
+        print(output_file)
+        output_file.write_text(f"<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={d[i]}\" />")
 
+    
     print("hello world")
     
