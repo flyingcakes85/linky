@@ -3,7 +3,7 @@ import os
 import json
 from pathlib import Path
 
-def build(links, output_dir):
+def build(links, output_dir = "build"):
     try:
         os.makedirs(output_dir, exist_ok=True)
     except:
@@ -13,7 +13,6 @@ def build(links, output_dir):
         output_file = Path(output_dir + "/" + i + "/index.html")
         output_file.parent.mkdir(exist_ok=True, parents=True)
         output_file.write_text(f"<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={links[i]}\" />")
-
 
 
 if __name__ == "__main__":
