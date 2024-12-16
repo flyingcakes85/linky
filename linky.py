@@ -10,10 +10,10 @@ def build(links, output_dir = "build"):
     except:
         print("Couldn't create build directory at " + output_dir)
     
-    for i in links:
-        output_file = Path(output_dir + "/" + i + "/index.html")
+    for link in links:
+        output_file = Path(output_dir + "/" + link + "/index.html")
         output_file.parent.mkdir(exist_ok=True, parents=True)
-        output_file.write_text(f"<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={links[i]}\" />")
+        output_file.write_text(f"<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={links[link]}\" />")
     
     if Path("static").is_dir():
         copytree("static", output_dir, dirs_exist_ok=True)
