@@ -1,11 +1,12 @@
 import argparse
-import os
+from os import makedirs
 import json
 from pathlib import Path
+from shutil import copytree
 
 def build(links, output_dir = "build"):
     try:
-        os.makedirs(output_dir, exist_ok=True)
+        makedirs(output_dir, exist_ok=True)
     except:
         print("Couldn't create build directory at " + output_dir)
     
@@ -13,6 +14,9 @@ def build(links, output_dir = "build"):
         output_file = Path(output_dir + "/" + i + "/index.html")
         output_file.parent.mkdir(exist_ok=True, parents=True)
         output_file.write_text(f"<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={links[i]}\" />")
+    
+    if Path("static").is_dir():
+        copytree("static", output_dir, dirs_exist_ok=True)
 
 
 if __name__ == "__main__":
